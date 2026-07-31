@@ -62,6 +62,7 @@
     document.querySelector('.menu').insertAdjacentHTML('beforeend','<button class="card guide" data-id="game" onclick="show(\'gameScreen\')"><i class="fa-solid fa-gamepad"></i><h3>게임</h3><span>동전 던지기</span></button>');
     function playCoin(choice){const randomValue=new Uint32Array(1);crypto.getRandomValues(randomValue);const result=randomValue[0]%2===0?'앞':'뒤';const before=points;const coin=document.getElementById('gameCoin');coin.classList.remove('toss');void coin.offsetWidth;coin.classList.add('toss');coin.textContent=result;if(choice===result){points=before*2;pointHistory.unshift(`+${before.toLocaleString()}P · 동전 던지기 성공 (결과: ${result})`);document.getElementById('gameMessage').textContent=`정답! ${result}이 나왔어요. ${before.toLocaleString()}P → ${points.toLocaleString()}P`; }else{points=0;pointHistory.unshift(`-${before.toLocaleString()}P · 동전 던지기 실패 (결과: ${result}, 0P 초기화)`);document.getElementById('gameMessage').textContent=`아쉬워요. ${result}이 나와서 보유 포인트가 0P가 되었어요.`;}localStorage.setItem('muldeuljaPoints',points);saveHistory();update()}
     document.getElementById('gameCoin').textContent='?';
+    document.querySelector('#historyScreen h2').insertAdjacentElement('afterend',document.querySelector('#historyScreen .back'));
     update();
   </script>
 </body>
